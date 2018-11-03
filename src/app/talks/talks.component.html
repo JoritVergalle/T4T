@@ -1,0 +1,83 @@
+<table class="ui celled table">
+  <thead>
+  <tr>
+    <th>Title</th>
+    <th>Length</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>Writing Fast Tests Against Enterprise Rails</td>
+    <td class="collapsing">60m</td>
+  </tr>
+  <tr>
+    <td>Lua for the Masses</td>
+    <td class="collapsing">45m</td>
+  </tr><tr>
+    <td>Overdoing it in Python</td>
+    <td class="collapsing">30m</td>
+  </tr>
+  </tbody>
+
+
+  <tfoot class="full-width">
+  <tr>
+    <th colspan="2">
+      <button class="ui right floated small primary labeled icon button">
+        <i class="clipboard icon"></i> Plan
+      </button>
+      <button class="ui small button" (click)="openAddTalk()">
+        Add
+      </button>
+      <button class="ui small button">
+        Read txt
+      </button>
+    </th>
+  </tr>
+  </tfoot>
+</table>
+
+<form [formGroup]='talk' (ngSubmit)='addTalk()' class="ui modal tiny addTalk">
+  <div class="ui header">
+    Add a talk
+  </div>
+  <div class="content">
+    <div class="ui form">
+      <div class="fields">
+
+        <div class="three wide field">
+          <label>Title</label>
+          <input type="text" name="title" formControlName='nr' placeholder="Title">
+          <div *ngIf='task.get("title").errors?.required && task.get("title").touched' class='ui pointing red basic label'>
+            Dit veld is verplicht.
+          </div>
+          <div *ngIf='task.get("title").errors?.minlength && task.get("title").touched' class='ui pointing red basic label'>
+            Dit veld moet minimum {{task.get("title").errors?.minlength.requiredLength}} tekens lang zijn.
+          </div>
+        </div>
+
+        <div class="thirteen wide field">
+          <label>Length</label>
+          <input type="text" name="length" formControlName='length' placeholder="Length">
+          <div *ngIf='task.get("length").errors?.required && task.get("length").touched' class='ui pointing red basic label'>
+            Dit veld is verplicht.
+          </div>
+          <div *ngIf='task.get("length").errors?.minlength && task.get("length").touched' class='ui pointing red basic label'>
+            Dit veld moet minimum {{task.get("length").errors?.minlength.requiredLength}} tekens lang zijn.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="ui red cancel compact button">
+      <i class="remove icon"></i>
+      Annuleer
+    </div>
+    <button class="ui green ok compact button" type='submit'>
+      <i class="checkmark icon"></i>
+      Maak
+    </button>
+  </div>
+</form>
