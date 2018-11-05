@@ -6,6 +6,10 @@
   </tr>
   </thead>
   <tbody>
+  <tr *ngFor="let talk of talks">
+    <td>{{talk.title}}</td>
+    <td class="collapsing">{{talk.length}}</td>
+  </tr>
   <tr>
     <td>Writing Fast Tests Against Enterprise Rails</td>
     <td class="collapsing">60m</td>
@@ -37,47 +41,69 @@
   </tfoot>
 </table>
 
-<form [formGroup]='talk' (ngSubmit)='addTalk()' class="ui modal tiny addTalk">
+<form [formGroup]='talk' (ngSubmit)='addTalk()' class="ui addtalk">
   <div class="ui header">
     Add a talk
   </div>
   <div class="content">
     <div class="ui form">
       <div class="fields">
-
-        <div class="three wide field">
+        <div class="thirteen wide field">
           <label>Title</label>
-          <input type="text" name="title" formControlName='nr' placeholder="Title">
-          <div *ngIf='task.get("title").errors?.required && task.get("title").touched' class='ui pointing red basic label'>
+          <input type="text" name="title" formControlName='title' placeholder="Title">
+          <div *ngIf='talk.get("title").errors?.required && talk.get("title").touched' class='ui pointing red basic label'>
             Dit veld is verplicht.
           </div>
-          <div *ngIf='task.get("title").errors?.minlength && task.get("title").touched' class='ui pointing red basic label'>
-            Dit veld moet minimum {{task.get("title").errors?.minlength.requiredLength}} tekens lang zijn.
+          <div *ngIf='talk.get("title").errors?.minlength && talk.get("title").touched' class='ui pointing red basic label'>
+            Dit veld moet minimum {{talk.get("title").errors?.minlength.requiredLength}} tekens lang zijn.
           </div>
         </div>
-
-        <div class="thirteen wide field">
+        <div class="three wide field">
           <label>Length</label>
           <input type="text" name="length" formControlName='length' placeholder="Length">
-          <div *ngIf='task.get("length").errors?.required && task.get("length").touched' class='ui pointing red basic label'>
+          <div *ngIf='talk.get("length").errors?.required && talk.get("length").touched' class='ui pointing red basic label'>
             Dit veld is verplicht.
           </div>
-          <div *ngIf='task.get("length").errors?.minlength && task.get("length").touched' class='ui pointing red basic label'>
-            Dit veld moet minimum {{task.get("length").errors?.minlength.requiredLength}} tekens lang zijn.
+          <div *ngIf='talk.get("length").errors?.minlength && talk.get("length").touched' class='ui pointing red basic label'>
+            Dit veld moet minimum {{talk.get("length").errors?.minlength.requiredLength}} tekens lang zijn.
           </div>
         </div>
-
       </div>
     </div>
   </div>
   <div class="actions">
     <div class="ui red cancel compact button">
       <i class="remove icon"></i>
-      Annuleer
+      Cancel
     </div>
     <button class="ui green ok compact button" type='submit'>
       <i class="checkmark icon"></i>
-      Maak
+      Add
     </button>
   </div>
 </form>
+
+<div class="ui makerule">
+  <div class="ui header">
+    Read textfile
+  </div>
+  <div class="content">
+    <div class="ui form">
+      <div class="field">
+        <label>Textfile</label>
+        <input type="file" id="file" (change)="fileChanged($event)" #fileInput>
+        <!--<input type="file" id="file">-->
+      </div>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="ui red cancel compact button">
+      <i class="remove icon"></i>
+      Cancel
+    </div>
+    <button class="ui green ok compact button"  (click)="readTxt()">
+      <i class="checkmark icon"></i>
+      Read
+    </button>
+  </div>
+</div>
