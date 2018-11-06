@@ -1,4 +1,4 @@
-<table class="ui celled table">
+<table class="ui celled">
   <thead>
   <tr>
     <th>Title</th>
@@ -10,24 +10,11 @@
     <td>{{talk.title}}</td>
     <td class="collapsing">{{talk.length}}</td>
   </tr>
-  <tr>
-    <td>Writing Fast Tests Against Enterprise Rails</td>
-    <td class="collapsing">60m</td>
-  </tr>
-  <tr>
-    <td>Lua for the Masses</td>
-    <td class="collapsing">45m</td>
-  </tr><tr>
-    <td>Overdoing it in Python</td>
-    <td class="collapsing">30m</td>
-  </tr>
   </tbody>
-
-
   <tfoot class="full-width">
   <tr>
     <th colspan="2">
-      <button class="ui right floated small primary labeled icon button">
+      <button class="ui right floated small primary labeled icon button" (click)="planTracks()">
         <i class="clipboard icon"></i> Plan
       </button>
       <button class="ui small button" (click)="openAddTalk()">
@@ -107,3 +94,19 @@
     </button>
   </div>
 </div>
+
+<table class="ui celled table">
+  <thead>
+  <tr>
+    <th>Start Time</th>
+    <th>Title</th>
+    <th>Length</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let talk of trackOne.morning.talks">
+    <td>09:00AM</td>
+    <td>{{talk.title}}</td>
+    <td class="collapsing">{{talk.length}}</td>
+  </tr>
+  </tbody>
