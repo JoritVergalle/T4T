@@ -1,6 +1,7 @@
 export class Talk {
   private _title: string;
   private _length: number;
+  private _time: Date;
 
   constructor(title: string, length: number) {
     this._title = title;
@@ -21,5 +22,13 @@ export class Talk {
 
   set length(value: number) {
     this._length = value;
+  }
+
+  get time(): Date {
+    return this._time;
+  }
+
+  set time(value: Date) {
+    this._time = value;
   }
 }

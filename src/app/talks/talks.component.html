@@ -20,7 +20,7 @@
       <button class="ui small button" (click)="openAddTalk()">
         Add
       </button>
-      <button class="ui small button">
+      <button class="ui small button" (click)="openReadTxt()">
         Read txt
       </button>
     </th>
@@ -28,7 +28,7 @@
   </tfoot>
 </table>
 
-<form [formGroup]='talk' (ngSubmit)='addTalk()' class="ui addtalk">
+<form [formGroup]='talk' *ngIf="showAdd" (ngSubmit)='addTalk()' class="ui addtalk">
   <div class="ui header">
     Add a talk
   </div>
@@ -38,20 +38,24 @@
         <div class="thirteen wide field">
           <label>Title</label>
           <input type="text" name="title" formControlName='title' placeholder="Title">
-          <div *ngIf='talk.get("title").errors?.required && talk.get("title").touched' class='ui pointing red basic label'>
+          <div *ngIf='talk.get("title").errors?.required && talk.get("title").touched'
+               class='ui pointing red basic label'>
             Dit veld is verplicht.
           </div>
-          <div *ngIf='talk.get("title").errors?.minlength && talk.get("title").touched' class='ui pointing red basic label'>
+          <div *ngIf='talk.get("title").errors?.minlength && talk.get("title").touched'
+               class='ui pointing red basic label'>
             Dit veld moet minimum {{talk.get("title").errors?.minlength.requiredLength}} tekens lang zijn.
           </div>
         </div>
         <div class="three wide field">
           <label>Length</label>
           <input type="text" name="length" formControlName='length' placeholder="Length">
-          <div *ngIf='talk.get("length").errors?.required && talk.get("length").touched' class='ui pointing red basic label'>
+          <div *ngIf='talk.get("length").errors?.required && talk.get("length").touched'
+               class='ui pointing red basic label'>
             Dit veld is verplicht.
           </div>
-          <div *ngIf='talk.get("length").errors?.minlength && talk.get("length").touched' class='ui pointing red basic label'>
+          <div *ngIf='talk.get("length").errors?.minlength && talk.get("length").touched'
+               class='ui pointing red basic label'>
             Dit veld moet minimum {{talk.get("length").errors?.minlength.requiredLength}} tekens lang zijn.
           </div>
         </div>
@@ -59,10 +63,10 @@
     </div>
   </div>
   <div class="actions">
-    <div class="ui red cancel compact button">
+    <button class="ui red cancel compact button" (click)="cancelAddTalk()">
       <i class="remove icon"></i>
       Cancel
-    </div>
+    </button>
     <button class="ui green ok compact button" type='submit'>
       <i class="checkmark icon"></i>
       Add
@@ -70,7 +74,7 @@
   </div>
 </form>
 
-<div class="ui makerule">
+<div class="ui" *ngIf="showReadTxt">
   <div class="ui header">
     Read textfile
   </div>
@@ -84,29 +88,82 @@
     </div>
   </div>
   <div class="actions">
-    <div class="ui red cancel compact button">
+    <Button class="ui red cancel compact button" (click)="cancelReadTxt()">
       <i class="remove icon"></i>
       Cancel
-    </div>
-    <button class="ui green ok compact button"  (click)="readTxt()">
+    </Button>
+    <button class="ui green ok compact button" (click)="readTxt()">
       <i class="checkmark icon"></i>
       Read
     </button>
   </div>
 </div>
 
-<table class="ui celled table">
-  <thead>
-  <tr>
-    <th>Start Time</th>
-    <th>Title</th>
-    <th>Length</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let talk of trackOne.morning.talks">
-    <td>09:00AM</td>
-    <td>{{talk.title}}</td>
-    <td class="collapsing">{{talk.length}}</td>
-  </tr>
-  </tbody>
+<div *ngIf="planned">
+  <h3>Track 1</h3>
+  <table class="ui celled table">
+    <thead>
+    <tr>
+      <th>Start Time</th>
+      <th>Title</th>
+      <th>Length</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let talk of trackOne.morning.talks">
+      <td>{{talk.time | date:'h:mm a'}}</td>
+      <td>{{talk.title}}</td>
+      <td class="collapsing">{{talk.length}}</td>
+    </tr>
+    <tr>
+      <td>12:00 PM</td>
+      <td>Lunch</td>
+      <td class="collapsing">60</td>
+    </tr>
+    <tr *ngFor="let talk of trackOne.afternoon.talks">
+      <td>{{talk.time | date:'h:mm a'}}</td>
+      <td>{{talk.title}}</td>
+      <td class="collapsing">{{talk.length}}</td>
+    </tr>
+    <tr>
+      <td>05:00 PM</td>
+      <td>Networking event</td>
+      <td class="collapsing">-</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h3>Track 2</h3>
+  <table class="ui celled table">
+    <thead>
+    <tr>
+      <th>Start Time</th>
+      <th>Title</th>
+      <th>Length</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let talk of trackTwo.morning.talks">
+      <td>{{talk.time | date:'h:mm a'}}</td>
+      <td>{{talk.title}}</td>
+      <td class="collapsing">{{talk.length}}</td>
+    </tr>
+    <tr>
+      <td>12:00 PM</td>
+      <td>Lunch</td>
+      <td class="collapsing">60</td>
+    </tr>
+    <tr *ngFor="let talk of trackTwo.afternoon.talks">
+      <td>{{talk.time | date:'h:mm a'}}</td>
+      <td>{{talk.title}}</td>
+      <td class="collapsing">{{talk.length}}</td>
+    </tr>
+    <tr>
+      <td>05:00 PM</td>
+      <td>Networking event</td>
+      <td class="collapsing">-</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
