@@ -9,7 +9,7 @@ After installing the modules `npm install`, run `ng serve` for a dev server. Nav
 
 ## textfile
 
-`Writing Fast Tests Against Enterprise Rails 60min
+```Writing Fast Tests Against Enterprise Rails 60min
 Overdoing it in Python 45min
 Lua for the Masses 30min
 Ruby Errors from Mismatched Gem Versions 45min
@@ -27,4 +27,4 @@ Ruby vs. Clojure for Back-End Development 30min
 Ruby on Rails Legacy App Maintenance 60min
 A World Without HackerNews 30min
 User Interface CSS in Rails Apps 30min
-Rails for Python Developers lightning`
+Rails for Python Developers lightning```
