@@ -27,4 +27,4 @@ Ruby vs. Clojure for Back-End Development 30min
 Ruby on Rails Legacy App Maintenance 60min
 A World Without HackerNews 30min
 User Interface CSS in Rails Apps 30min
-Rails for Python Developers lightning
+Rails for Python Developers lightning`
